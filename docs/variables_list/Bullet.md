@@ -8,8 +8,8 @@
 
 #### Métodos:
 
-|Nome|O que a função faz|Avaliação do nome|Novo nome|Obs:
-|---	|---	|---	|---	|
+|Nome|O que a função faz|Avaliação do nome|Novo nome|Obs:|
+|---	|---	|---	|---	|---  |
 |Bullet()|Metodo construtor da classe|Possui o mesmo nome da classe, que segue os padrões da folha de estilo|Continuará como Bullet()||
 |Update()|Atualiza posição da bala no jogo|Nome pouco intuitivo|UpdatePosition()||
 |Render()|reenderiza a bala|Bom nome, de acordo com a folha de estilo|Continuará como Render()||
