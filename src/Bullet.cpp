@@ -9,20 +9,20 @@
 #define PLAYER "Player"
 
 Bullet::Bullet(float x, float y, GameObject *planet, float angle,
-			float initialHight, float speed, float maxDistance,
+			float initialHeight, float speed, float maxDistance,
 			string Sprite, bool targetsPlay, int frameCount)
 			:sprite(Sprite,0.1,1,frameCount) {
 
 	this->planet = planet;
-	this->initialHight = initialHight;
+	this->initialHeight = initialHeight;
 	box.setH(sprite.GetHeight());
 	box.setW(sprite.GetWidth());
 	float rotation = angle;
 	float arc = rotation * PI / HALF_TURN;
 	box.setX(planet->box.getCenterX() + ((planet->box.getW() / 2 +
-			planet->box.getCenterY() + initialHight) * cos(arc)));
+			planet->box.getCenterY() + initialHeight) * cos(arc)));
 	box.setY(planet->box.getCenterY() + ((planet->box.getH() / 2 +
-			planet->box.getCenterY() + initialHight) * sin(arc)));
+			planet->box.getCenterY() + initialHeight) * sin(arc)));
 
 	box.setX(x - sprite.GetWidth() / 2);
 	box.setY(y - sprite.GetHeight() / 2);

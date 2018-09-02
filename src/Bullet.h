@@ -33,7 +33,7 @@ public:
 	void NotifyCollision(GameObject&);
 	bool targetsPlayer;
 private:
-	float initialHight;
+	float initialHeight;
 	GameObject *planet;
 	Sprite sprite;
 	Point speed;
