@@ -10,6 +10,7 @@
 #include "Camera.h"
 #include "Game.h"
 #include "InputManager.h"
+#define ROTATION_ANGLE 180
 
 const float ANGLE = 3.1415/180 /* Constant used in angle calculation */
 
@@ -23,20 +24,20 @@ HorizontalLaser::HorizontalLaser(float x,float y,GameObject* planet, float rotat
 	box.setW(sp.GetWidth());
 	this->rotation = rotation;
 	this->initialHeight = initialHeight;
-	float arc = rotation*ANGLE;
+	float arc = rotation * ANGLE;
 
-	box.setX(planet->box.getCenterX() + ((planet->box.getW()/2 + 
-			 planet->box.getCenterY() + initialHeight)*cos(arc)) - 
-			 (box.getW()/2));
-	box.setY(planet->box.getCenterY() + ((planet->box.getH()/2 + 
-			 planet->box.getCenterY() + initialHeight)*sin(arc)) - 
-			 (box.getH()/2));
+	box.setX(planet->box.getCenterX() + ((planet->box.getW() / 2 + 
+			 planet->box.getCenterY() + initialHeight) * cos(arc)) - 
+			 (box.getW() / 2));
+	box.setY(planet->box.getCenterY() + ((planet->box.getH() / 2 + 
+			 planet->box.getCenterY() + initialHeight) * sin(arc)) - 
+			 (box.getH() / 2));
 	
 	loadedFrame = frameC;
 	frameInit = frameI;
 	sp.SetFlipH(false);
-	sp.SetFrame(frameInit-1);
-	sp.SetLoop(frameInit-1,frameInit-1);
+	sp.SetFrame(frameInit - 1);
+	sp.SetLoop(frameInit - 1,frameInit - 1);
 	sp.Update(0);
 
 }
@@ -51,20 +52,20 @@ void HorizontalLaser::Update(float dt){
 	sumRotation = planet->sumRotation;
 	rotation += sumRotation;
 
-		float arc = rotation*ANGLE;
-		box.setX(planet->box.getCenterX() + ((planet->box.getW()/2 - 
-				 300 + initialHeight)*cos(arc)) - (box.getW()/2));
-		box.setY(planet->box.getCenterY()  + ((planet->box.getH()/2 - 
-				 300 + initialHeight)*sin(arc)) - (box.getH()/2));
+		float arc = rotation * ANGLE;
+		box.setX(planet->box.getCenterX() + ((planet->box.getW() / 2 - 
+				 300 + initialHeight) * cos(arc)) - (box.getW() / 2));
+		box.setY(planet->box.getCenterY() + ((planet->box.getH() / 2 - 
+				 300 + initialHeight) * sin(arc)) - (box.getH() / 2));
 		timer.Update(dt);
 		if(timer.Get() > 1){
 			timer.Restart();
-			if(sp.GetCurrentFrame() == frameInit-1){
-				sp.SetFrame(loadedFrame-1);
-				sp.SetLoop(loadedFrame-1,loadedFrame-1);
+			if(sp.GetCurrentFrame() == frameInit - 1){
+				sp.SetFrame(loadedFrame - 1);
+				sp.SetLoop(loadedFrame - 1,loadedFrame - 1);
 			}else{
-				sp.SetFrame(frameInit-1);
-				sp.SetLoop(frameInit-1,frameInit-1);
+				sp.SetFrame(frameInit - 1);
+				sp.SetLoop(frameInit - 1,frameInit - 1);
 			}
 		}
 		sp.Update(0);
@@ -72,7 +73,7 @@ void HorizontalLaser::Update(float dt){
 
 void HorizontalLaser::Render(){
 	sp.Render(box.getX() + Camera::pos.getX(),box.getY() + 
-			  Camera::pos.getY(),rotation+180);
+			  Camera::pos.getY(),rotation + ROTATION_ANGLE);
 }
 
 bool HorizontalLaser::IsDead(){
