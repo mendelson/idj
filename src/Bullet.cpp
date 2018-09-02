@@ -4,21 +4,25 @@
 #define PI 3.14159265359
 #define HALF_TURN 180
 
-Bullet::Bullet(float x,float y,GameObject* planet, float angle,
+#define NOISE "audio/projetil.wav"
+#define BULLET "Bullet"
+#define PLAYER "Player"
+
+Bullet::Bullet(float x, float y, GameObject *planet, float angle,
 			float initialHight, float speed, float maxDistance,
-			string Sprite,bool targetsPlay,int frameCount)
+			string Sprite, bool targetsPlay, int frameCount)
 			:sprite(Sprite,0.1,1,frameCount) {
 
 	this->planet = planet;
+	this->initialHight = initialHight;
 	box.setH(sprite.GetHeight());
 	box.setW(sprite.GetWidth());
-	rotation = angle;
+	float rotation = angle;
 	float arc = rotation * PI / HALF_TURN;
-	this->initialHight = initialHight;
-	box.setX(planet->box.getCenterX() + ((planet->box.getW()/2 +
-			planet->box.getCenterY() + initialHight)*cos(arc)));
-	box.setY(planet->box.getCenterY()  + ((planet->box.getH()/2 +
-			planet->box.getCenterY()  + initialHight)*sin(arc)));
+	box.setX(planet->box.getCenterX() + ((planet->box.getW() / 2 +
+			planet->box.getCenterY() + initialHight) * cos(arc)));
+	box.setY(planet->box.getCenterY() + ((planet->box.getH() / 2 +
+			planet->box.getCenterY() + initialHight) * sin(arc)));
 
 	box.setX(x - sprite.GetWidth() / 2);
 	box.setY(y - sprite.GetHeight() / 2);
@@ -32,14 +36,14 @@ Bullet::Bullet(float x,float y,GameObject* planet, float angle,
 	this->frameCount = frameCount;
 	targetsPlayer = targetsPlay;
 	sprite.SetLoop(0,(frameCount - 1));
-	Sound* sound = new Sound("audio/projetil.wav");
+	Sound *sound = new Sound(NOISE);
 	sound->Play(0);
 	delete(sound);
 }
 
 void Bullet::Update(float dt) {
-	if (sprite.GetCurrentFrame() == (frameCount-1)){
-		sprite.SetLoop((frameCount-1),(frameCount-1));
+	if (sprite.GetCurrentFrame() == (frameCount - 1)) {
+		sprite.SetLoop((frameCount - 1),(frameCount - 1));
 	}
 
 	box.setX(box.getX() + (dt * speed.magVector() * cos(angle)));
@@ -50,7 +54,7 @@ void Bullet::Update(float dt) {
 
 void Bullet::Render() {
 	float correctedAngle = angle * HALF_TURN / PI;
-	sprite.Render(box.getX() + Camera::pos.getX(),box.getY() + Camera::pos.getY(),
+	sprite.Render(box.getX() + Camera::pos.getX(), box.getY() + Camera::pos.getY(),
 				correctedAngle);
 }
 
@@ -66,11 +70,11 @@ Sprite Bullet::getSprite() {
 }
 
 bool Bullet::Is(string type) {
-	return (type == "Bullet");
+	return (type == BULLET);
 }
 
-void Bullet::NotifyCollision(GameObject& other) {
-	if(other.Is("Player")){
+void Bullet::NotifyCollision(GameObject &other) {
+	if(other.Is(PLAYER)){
 		distanceLeft = 0;
 	}
 }

@@ -3,8 +3,6 @@
 
    Created on: 16/04/2015
        Author: Vitor
-  Reviewed on: 01/09/2018
-     Reviewer: Gabriela Barrozo Guedes
  */
 
 #ifndef SRC_BULLET_H_
@@ -24,8 +22,8 @@ using std::endl;
 
 class Bullet : public GameObject {
 public:
-	Bullet(float x,float y,GameObject* planet, float angle, float initialHight,
-			float speed,float maxDistance, string sprite,bool targetsPlay,
+	Bullet(float x, float y, GameObject *planet, float angle, float initialHight,
+			float speed, float maxDistance, string sprite, bool targetsPlay,
 			int frameCount = 1);
 	void Update(float dt);
 	void Render();
@@ -36,7 +34,7 @@ public:
 	bool targetsPlayer;
 private:
 	float initialHight;
-	GameObject* planet;
+	GameObject *planet;
 	Sprite sprite;
 	Point speed;
 	float distanceLeft;
@@ -44,7 +42,4 @@ private:
 	int frameCount;
 };
 
-
-
-
-#endif /* SRC_BULLET_H_ */
+#endif
