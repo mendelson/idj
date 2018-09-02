@@ -13,7 +13,6 @@
 #include "GameObject.h"
 #include "Timer.h"
 
-
 class HorizontalLaser : public GameObject{
 public:
 	HorizontalLaser(float x,float y,GameObject* planet, float rotation,

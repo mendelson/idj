@@ -6,10 +6,12 @@
  * 	Reviewed on: 02/09/2018
  * 		Reviewer: Vitor
  */
-#include "HorizontalLaser.h"
+#include "./HorizontalLaser.h"
 #include "Camera.h"
 #include "Game.h"
 #include "InputManager.h"
+
+const float ANGLE = 3.1415/180 /* Constant used in angle calculation */
 
 HorizontalLaser::HorizontalLaser(float x,float y,GameObject* planet, float rotation,
 						   float initialHeight,int frameI,int frameC)
@@ -21,7 +23,7 @@ HorizontalLaser::HorizontalLaser(float x,float y,GameObject* planet, float rotat
 	box.setW(sp.GetWidth());
 	this->rotation = rotation;
 	this->initialHeight = initialHeight;
-	float arc = rotation*3.1415/180;
+	float arc = rotation*ANGLE;
 
 	box.setX(planet->box.getCenterX() + ((planet->box.getW()/2 + 
 			 planet->box.getCenterY() + initialHeight)*cos(arc)) - 
@@ -43,11 +45,13 @@ HorizontalLaser::~HorizontalLaser() {
 	// TODO Auto-generated destructor stub
 }
 
+/* Update the laser position on the screen */
+
 void HorizontalLaser::Update(float dt){
 	sumRotation = planet->sumRotation;
 	rotation += sumRotation;
 
-		float arc = rotation*3.1415/180;
+		float arc = rotation*ANGLE;
 		box.setX(planet->box.getCenterX() + ((planet->box.getW()/2 - 
 				 300 + initialHeight)*cos(arc)) - (box.getW()/2));
 		box.setY(planet->box.getCenterY()  + ((planet->box.getH()/2 - 
