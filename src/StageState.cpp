@@ -18,132 +18,174 @@
 #include "WeaponGun.h"
 #include "WeaponSword.h"
 
+#define BACKGROUND_IMG "img/BACKGROUND.png"
+#define PLANET_LEVEL1 "img/planetafase1.png"
+#define PINK_PLANET "img/planeta_rosa.png"
+#define YELLOW_PLANET "img/planeta_amarelo.png"
+#define SHOOTING_STAR_BLUE "img/estrela_cadente_azul.png"
+#define SHOOTING_STAR "img/estrela_cadente.png")
+#define PLANT_IMG "img/plataformas/2200/planta.png"
+#define ENERGY_IMG "img/ENERGIA_V1.png"
+#define SHIP_SHUT_DOWN "img/nave-desligada.png"
+#define LUPS_ARMS "img/Sprites_Bracos_LUP.png"
+#define SWORD_IMG "img/Sprites_Espada_LUP.png"
+#define GUN_IMG "img/Sprites_Gun_LUP.png"
+#define BLANK_IMG "img/blank.png"
+
+#define PLATFORM_2200_03 "img/plataformas/2200/plataformas2200_03.png"
+#define PLATFORM_2200_05 "img/plataformas/2200/plataformas2200_05.png"
+#define PLATFORM_2200_08 "img/plataformas/2200/plataformas2200_08.png"
+#define PLATFORM_2200_10 "img/plataformas/2200/plataformas2200_10.png"
+#define PLATFORM_2200_13 "img/plataformas/2200/plataformas2200_13.png"
+#define PLATFORM_2200_15 "img/plataformas/2200/plataformas2200_15.png"
+#define PLATFORM_2200_17 "img/plataformas/2200/plataformas2200_17.png"
+#define PLATFORM_2200_19 "img/plataformas/2200/plataformas2200_19.png"
+#define PLATFORM_2200_21 "img/plataformas/2200/plataformas2200_21.png"
+#define PLATFORM_2200_23 "img/plataformas/2200/plataformas2200_23.png"
+#define PLATFORM_2200_35 "img/plataformas/2200/plataformas2200_35.png"
+#define PLATFORM_2200_37 "img/plataformas/2200/plataformas2200_37.png"
+#define PLATFORM_2200_39 "img/plataformas/2200/plataformas2200_39.png"
+#define PLATFORM_2200_41 "img/plataformas/2200/plataformas2200_41.png"
+#define PLATFORM_2200_44 "img/plataformas/2200/plataformas2200_44.png"
+#define PLATFORM_2200_47 "img/plataformas/2200/plataformas2200_47.png"
+#define PLATFORM_2200_50 "img/plataformas/2200/plataformas2200_50.png"
+
+#define MUSIC_AUDIO "audio/fase1.ogg"
+
+#define PLANET_MAP "map/mapPlaneta.txt"
+#define MAP_UP "map/mapSubida.txt"
+
+#define WEAPON_BROOM "WeaponBroom"
+#define WEAPON_GUN "WeaponGun"
+#define WEAPON_SWORD "WeaponSword"
+
 StageState::WeaponName_lazy StageState::weapon;
 
-StageState::StageState() :bg("img/BACKGROUND.png"), music("audio/fase1.ogg"), ui(3), changeWpCD() {
+StageState::StageState() :bg(BACKGROUND_IMG), music(MUSIC_AUDIO), ui(3),
+						  changeWpCD() {
 	quitRequested = false;
 	srand((unsigned int) time(NULL));
 	xBg = -1400;
 	this->weapon = BROOM;
 
 
-	GameObject* planet = new Planet(0,-100,"img/planetafase1.png","map/mapPlaneta.txt","map/mapSubida.txt",1);
+	GameObject* planet = new Planet(0,-100, PLANET_LEVEL1, PLANET_MAP, MAP_UP,1);
 
 
-	GameObject* planeta1 = new PlanetaFundo(-2*xBg,-200,planet,0,0,"img/planeta_rosa.png");
+	GameObject* planeta1 = new PlanetaFundo(-2*xBg,-200,planet,0,0,PINK_PLANET);
 	objectArray.emplace_back(planeta1);
 
-	GameObject* planeta2 = new PlanetaFundo(xBg,-200,planet,0,0,"img/planeta_amarelo.png");
+	GameObject* planeta2 = new PlanetaFundo(xBg,-200,planet,0,0, YELLOW_PLANET);
 	objectArray.emplace_back(planeta2);
 
-	GameObject* cometa1 = new Cometa(-2*xBg,-200,planet,0,0,"img/estrela_cadente_azul.png");
+	GameObject* cometa1 = new Cometa(-2*xBg,-200,planet,0,0,SHOOTING_STAR_BLUE);
 	objectArray.emplace_back(cometa1);
 
-	GameObject* cometa2 = new Cometa(xBg,-200,planet,0,0,"img/estrela_cadente.png");
+	GameObject* cometa2 = new Cometa(xBg,-200,planet,0,0,SHOOTING_STAR;
 	objectArray.emplace_back(cometa2);
 
 	objectArray.emplace_back(planet);
 
-	GameObject* plataforma1 = new Plataforma(500,100,planet,-30,100,"img/plataformas/2200/plataformas2200_44.png");
+	GameObject* plataforma1 = new Plataforma(500,100,planet,-30,100,PLATFORM_2200_44);
 	objectArray.emplace_back(plataforma1);
 
-	GameObject* plataforma2 = new Plataforma(500,0,planet,-25,150,"img/plataformas/2200/plataformas2200_39.png");
+	GameObject* plataforma2 = new Plataforma(500,0,planet,-25,150,PLATFORM_2200_39);
 	objectArray.emplace_back(plataforma2);
 
-	GameObject* plataforma3 = new Plataforma(500,0,planet,-20,200,"img/plataformas/2200/plataformas2200_13.png");
+	GameObject* plataforma3 = new Plataforma(500,0,planet,-20,200,PLATFORM_2200_13);
 	objectArray.emplace_back(plataforma3);
 
-	GameObject* plataforma4 = new Plataforma(500,0,planet,-15,250,"img/plataformas/2200/plataformas2200_50.png");
+	GameObject* plataforma4 = new Plataforma(500,0,planet,-15,250,PLATFORM_2200_50);
 	objectArray.emplace_back(plataforma4);
 
-	GameObject* planta1 = new Planta(500,0,planet,-1,50,"img/plataformas/2200/planta.png");
+	GameObject* planta1 = new Planta(500,0,planet,-1,50, PLANT_IMG);
 	objectArray.emplace_back(planta1);
 
-	GameObject* planta2 = new Planta(500,0,planet,39,50,"img/plataformas/2200/planta.png");
+	GameObject* planta2 = new Planta(500,0,planet,39,50, PLANT_IMG);
 	objectArray.emplace_back(planta2);
 
-	GameObject* plataforma5 = new Plataforma(500,0,planet,47,200,"img/plataformas/2200/plataformas2200_15.png");
+	GameObject* plataforma5 = new Plataforma(500,0,planet,47,200,PLATFORM_2200_15);
 	objectArray.emplace_back(plataforma5);
 
-	GameObject* planta3 = new Planta(500,0,planet,53,50,"img/plataformas/2200/planta.png");
+	GameObject* planta3 = new Planta(500,0,planet,53,50, PLANT_IMG);
 	objectArray.emplace_back(planta3);
 
-	GameObject* plataforma6 = new Plataforma(500,0,planet,75,150,"img/plataformas/2200/plataformas2200_03.png");
+	GameObject* plataforma6 = new Plataforma(500,0,planet,75,150,PLATFORM_2200_03);
 	objectArray.emplace_back(plataforma6);
 
-	GameObject* plataforma7 = new Plataforma(500,0,planet,80,220,"img/plataformas/2200/plataformas2200_05.png");
+	GameObject* plataforma7 = new Plataforma(500,0,planet,80,220, PLATFORM_2200_05);
 	objectArray.emplace_back(plataforma7);
 
-	GameObject* plataforma9 = new Plataforma(500,0,planet,85,280,"img/plataformas/2200/plataformas2200_17.png");
+	GameObject* plataforma9 = new Plataforma(500,0,planet,85,280,PLATFORM_2200_17);
 	objectArray.emplace_back(plataforma9);
 
-	GameObject* plataforma10 = new Plataforma(500,0,planet,90,330,"img/plataformas/2200/plataformas2200_21.png");
+	GameObject* plataforma10 = new Plataforma(500,0,planet,90,330,PLATFORM_2200_21);
 	objectArray.emplace_back(plataforma10);
 
-	GameObject* plataforma11 = new Plataforma(500,0,planet,95,330,"img/plataformas/2200/plataformas2200_19.png");
+	GameObject* plataforma11 = new Plataforma(500,0,planet,95,330,PLATFORM_2200_19);
 	objectArray.emplace_back(plataforma11);
 
-	GameObject* plataforma12 = new Plataforma(500,0,planet,100,310,"img/plataformas/2200/plataformas2200_47.png");
+	GameObject* plataforma12 = new Plataforma(500,0,planet,100,310, PLATFORM_2200_47);
 	objectArray.emplace_back(plataforma12);
 
-	GameObject* plataforma13 = new Plataforma(500,0,planet,105,250,"img/plataformas/2200/plataformas2200_10.png");
+	GameObject* plataforma13 = new Plataforma(500,0,planet,105,250,PLATFORM_2200_10);
 	objectArray.emplace_back(plataforma13);
 
-	GameObject* plataforma14 = new Plataforma(500,0,planet,140,150,"img/plataformas/2200/plataformas2200_23.png");
+	GameObject* plataforma14 = new Plataforma(500,0,planet,140,150,PLATFORM_2200_23);
 	objectArray.emplace_back(plataforma14);
 
-	GameObject* plataforma15 = new Plataforma(500,0,planet,150,150,"img/plataformas/2200/plataformas2200_08.png");
+	GameObject* plataforma15 = new Plataforma(500,0,planet,150,150,PLATFORM_2200_08);
 	objectArray.emplace_back(plataforma15);
 
-	GameObject* plataforma16 = new Plataforma(500,0,planet,170,150,"img/plataformas/2200/plataformas2200_35.png");
+	GameObject* plataforma16 = new Plataforma(500,0,planet,170,150, PLATFORM_2200_35);
 	objectArray.emplace_back(plataforma16);
 
-	GameObject* plataforma17 = new Plataforma(500,0,planet,175,150,"img/plataformas/2200/plataformas2200_19.png");
+	GameObject* plataforma17 = new Plataforma(500,0,planet,175,150,PLATFORM_2200_19);
 	objectArray.emplace_back(plataforma17);
 
-	GameObject* plataforma18 = new Plataforma(500,0,planet,180,150,"img/plataformas/2200/plataformas2200_37.png");
+	GameObject* plataforma18 = new Plataforma(500,0,planet,180,150, PLATFORM_2200_37);
 	objectArray.emplace_back(plataforma18);
 
-	GameObject* plataforma19 = new Plataforma(500,0,planet,218,150,"img/plataformas/2200/plataformas2200_15.png");
+	GameObject* plataforma19 = new Plataforma(500,0,planet,218,150,PLATFORM_2200_15);
 	objectArray.emplace_back(plataforma19);
 
-	GameObject* planta4 = new Planta(500,0,planet,221.5,50,"img/plataformas/2200/planta.png");
+	GameObject* planta4 = new Planta(500,0,planet,221.5,50,PLANT_IMG);
 	objectArray.emplace_back(planta4);
 
-	GameObject* plataforma20 = new Plataforma(500,0,planet,224,200,"img/plataformas/2200/plataformas2200_41.png");
+	GameObject* plataforma20 = new Plataforma(500,0,planet,224,200, PLATFORM_2200_41);
 	objectArray.emplace_back(plataforma20);
 
-	GameObject* planta5 = new Planta(500,0,planet,226.5,50,"img/plataformas/2200/planta.png");
+	GameObject* planta5 = new Planta(500,0,planet,226.5,50,PLANT_IMG);
 	objectArray.emplace_back(planta5);
 
-	GameObject* plataforma21 = new Plataforma(500,0,planet,230,150,"img/plataformas/2200/plataformas2200_41.png");
+	GameObject* plataforma21 = new Plataforma(500,0,planet,230,150, PLATFORM_2200_41);
 	objectArray.emplace_back(plataforma21);
 
-	GameObject* plataforma22 = new Plataforma(500,0,planet,230,250,"img/plataformas/2200/plataformas2200_41.png");
+	GameObject* plataforma22 = new Plataforma(500,0,planet,230,250, PLATFORM_2200_41);
 	objectArray.emplace_back(plataforma22);
 
-	GameObject* planta6 = new Planta(500,0,planet,231,50,"img/plataformas/2200/planta.png");
+	GameObject* planta6 = new Planta(500,0,planet,231,50,PLANT_IMG);
 	objectArray.emplace_back(planta6);
 
-	GameObject* plataforma23 = new Plataforma(500,0,planet,236,200,"img/plataformas/2200/plataformas2200_41.png");
+	GameObject* plataforma23 = new Plataforma(500,0,planet,236,200, PLATFORM_2200_41);
 	objectArray.emplace_back(plataforma23);
 
-	GameObject* planta7 = new Planta(500,0,planet,236,50,"img/plataformas/2200/planta.png");
+	GameObject* planta7 = new Planta(500,0,planet,236,50,PLANT_IMG);
 	objectArray.emplace_back(planta7);
 
-	GameObject* plataforma24 = new Plataforma(500,0,planet,240,150,"img/plataformas/2200/plataformas2200_15.png");
+	GameObject* plataforma24 = new Plataforma(500,0,planet,240,150,PLATFORM_2200_15);
 	objectArray.emplace_back(plataforma24);
 
-	GameObject* energia1 = new Energia(500,0,planet,90,400,"img/ENERGIA_V1.png",4);
+	GameObject* energia1 = new Energia(500,0,planet,90,400,ENERGY_IMG,4);
 	objectArray.emplace_back(energia1);
 
-	GameObject* energia2 = new Energia(500,0,planet,47,400,"img/ENERGIA_V1.png",4);
+	GameObject* energia2 = new Energia(500,0,planet,47,400,ENERGY_IMG,4);
 	objectArray.emplace_back(energia2);
 
-	GameObject* energia3 = new Energia(500,0,planet,230,400,"img/ENERGIA_V1.png",4);
+	GameObject* energia3 = new Energia(500,0,planet,230,400,ENERGY_IMG,4);
 	objectArray.emplace_back(energia3);
 
-	GameObject* nave = new Nave(500,0,planet,-89,150,"img/nave-desligada.png");
+	GameObject* nave = new Nave(500,0,planet,-89,150,SHIP_SHUT_DOWN);
 	objectArray.emplace_back(nave);
 
 //	GameObject* laserEterno = new Laser(500,0,planet,-90,200,8,8);
@@ -159,8 +201,8 @@ StageState::StageState() :bg("img/BACKGROUND.png"), music("audio/fase1.ogg"), ui
 	GameObject* support = new Support(planet);
 	objectArray.emplace_back(support);
 
-	activeWeapon = new WeaponBroom("img/Sprites_Bracos_LUP.png");
-	//GameObject* weapon = new WeaponSword("img/Sprites_Espada_LUP.png");
+	activeWeapon = new WeaponBroom(LUPS_ARMS);
+	//GameObject* weapon = new WeaponSword(SWORD_IMG);
 	objectArray.emplace_back(activeWeapon);
 
 	GameObject* tank1 = new EnemyTank(500, 0,planet,-50,50);
@@ -228,19 +270,19 @@ void StageState::Update(float dt) {
 	if(InputManager::GetInstance().KeyPress(SDLK_d) && (changeWpCD.Get() > 0.5))
 	{
 		changeWpCD.Restart();
-		if (activeWeapon->Is("WeaponBroom"))
+		if (activeWeapon->Is(WEAPON_BROOM))
 		{
-			activeWeapon = new WeaponSword("img/Sprites_Espada_LUP.png");
+			activeWeapon = new WeaponSword(SWORD_IMG);
 			this->weapon = SWORD; //Sword
 		}
-		else if (activeWeapon->Is("WeaponSword"))
+		else if (activeWeapon->Is(WEAPON_SWORD))
 		{
-			activeWeapon = new WeaponGun("img/Sprites_Gun_LUP.png");
+			activeWeapon = new WeaponGun(GUN_IMG);
 			this->weapon = GUN; //Gun
 		}
-		else if (activeWeapon->Is("WeaponGun"))
+		else if (activeWeapon->Is(WEAPON_GUN))
 		{
-			activeWeapon = new WeaponBroom("img/Sprites_Bracos_LUP.png");
+			activeWeapon = new WeaponBroom(LUPS_ARMS);
 			this->weapon = BROOM; //Broom
 		}
 		objectArray.emplace_back(activeWeapon);
@@ -265,7 +307,7 @@ void StageState::Update(float dt) {
 void StageState::Render() {
 	if(Player::player->GetHp() <= 0 && Player::player->deathAnimation.Get() > 1.4)
 	{
-		Sprite* black = new Sprite("img/blank.png");
+		Sprite* black = new Sprite(BLANK_IMG);
 		black->Render(0,0);
 		delete black;
 		return;
