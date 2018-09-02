@@ -25,7 +25,7 @@ public:
 	Bullet(float x, float y, GameObject *planet, float angle, float initialHight,
 			float speed, float maxDistance, string sprite, bool targetsPlay,
 			int frameCount = 1);
-	void Update(float dt);
+	void Update(float deltaTime);
 	void Render();
 	bool IsDead();
 	Sprite getSprite();

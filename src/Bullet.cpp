@@ -41,15 +41,15 @@ Bullet::Bullet(float x, float y, GameObject *planet, float angle,
 	delete(sound);
 }
 
-void Bullet::Update(float dt) {
+void Bullet::Update(float deltaTime) {
 	if (sprite.GetCurrentFrame() == (frameCount - 1)) {
 		sprite.SetLoop((frameCount - 1),(frameCount - 1));
 	}
 
-	box.setX(box.getX() + (dt * speed.magVector() * cos(angle)));
-	box.setY(box.getY() + (dt * speed.magVector() * sin(angle)));
-	distanceLeft -= speed.magVector() * dt;
-	sprite.Update(dt);
+	box.setX(box.getX() + (deltaTime * speed.magVector() * cos(angle)));
+	box.setY(box.getY() + (deltaTime * speed.magVector() * sin(angle)));
+	distanceLeft -= speed.magVector() * deltaTime;
+	sprite.Update(deltaTime);
 }
 
 void Bullet::Render() {
