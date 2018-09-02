@@ -1,65 +1,75 @@
 #include "Bullet.h"
 #include "Camera.h"
 
-Bullet::Bullet(float x,float y,GameObject* planet, float angle, float alturaIncial, float speed, float maxDistance, string Sprite,bool targetsPlay,int frameCount):sp(Sprite,0.1,1,frameCount){
+#define PI 3.14159265359
+#define HALF_TURN 180
+
+Bullet::Bullet(float x,float y,GameObject* planet, float angle,
+			float initialHight, float speed, float maxDistance,
+			string Sprite,bool targetsPlay,int frameCount)
+			:sprite(Sprite,0.1,1,frameCount) {
 
 	this->planet = planet;
-	box.setH(sp.GetHeight());
-	box.setW(sp.GetWidth());
+	box.setH(sprite.GetHeight());
+	box.setW(sprite.GetWidth());
 	rotation = angle;
-	float arc = rotation*3.1415/180;
-	this->alturaInicial = alturaInicial;
-	box.setX(planet->box.getCenterX() + ((planet->box.getW()/2 + planet->box.getCenterY() + alturaInicial)*cos(arc)));
-	box.setY(planet->box.getCenterY()  + ((planet->box.getH()/2 + planet->box.getCenterY()  + alturaInicial)*sin(arc)));
+	float arc = rotation * PI / HALF_TURN;
+	this->initialHight = initialHight;
+	box.setX(planet->box.getCenterX() + ((planet->box.getW()/2 +
+			planet->box.getCenterY() + initialHight)*cos(arc)));
+	box.setY(planet->box.getCenterY()  + ((planet->box.getH()/2 +
+			planet->box.getCenterY()  + initialHight)*sin(arc)));
 
-	box.setX(x - sp.GetWidth()/2);
-	box.setY(y - sp.GetHeight()/2);
-	box.setH(sp.GetHeight());
-	box.setW(sp.GetWidth());
-	float coord = speed/sqrt(2);
-	Point* aux = new Point(coord,coord);
+	box.setX(x - sprite.GetWidth() / 2);
+	box.setY(y - sprite.GetHeight() / 2);
+	box.setH(sprite.GetHeight());
+	box.setW(sprite.GetWidth());
+	float coord = speed / sqrt(2);
+	Point *aux = new Point(coord,coord);
 	this->speed = *aux;
 	distanceLeft = maxDistance;
 	this->angle = angle;
 	this->frameCount = frameCount;
 	targetsPlayer = targetsPlay;
-	sp.SetLoop(0,(frameCount-1));
+	sprite.SetLoop(0,(frameCount - 1));
 	Sound* sound = new Sound("audio/projetil.wav");
 	sound->Play(0);
 	delete(sound);
 }
 
-void Bullet::Update(float dt){
-	if (sp.GetCurrentFrame() == (frameCount-1))
-		sp.SetLoop((frameCount-1),(frameCount-1));
+void Bullet::Update(float dt) {
+	if (sprite.GetCurrentFrame() == (frameCount-1)){
+		sprite.SetLoop((frameCount-1),(frameCount-1));
+	}
 
-	box.setX(box.getX() + (dt*speed.magVector()*cos(angle)));
-	box.setY(box.getY() + (dt*speed.magVector()*sin(angle)));
-	distanceLeft -= speed.magVector()*dt;
-	sp.Update(dt);
+	box.setX(box.getX() + (dt * speed.magVector() * cos(angle)));
+	box.setY(box.getY() + (dt * speed.magVector() * sin(angle)));
+	distanceLeft -= speed.magVector() * dt;
+	sprite.Update(dt);
 }
 
-void Bullet::Render(){
-	float correctedAngle = angle*180/3.141592653;
-	sp.Render(box.getX()+Camera::pos.getX(),box.getY() + Camera::pos.getY(),correctedAngle);
+void Bullet::Render() {
+	float correctedAngle = angle * HALF_TURN / PI;
+	sprite.Render(box.getX() + Camera::pos.getX(),box.getY() + Camera::pos.getY(),
+				correctedAngle);
 }
 
-bool Bullet::IsDead(){
+bool Bullet::IsDead() {
 	if(distanceLeft <= 0){
 		return true;
 	}
 	return false;
 }
 
-Sprite Bullet::getSprite(){
-	return sp;
+Sprite Bullet::getSprite() {
+	return sprite;
 }
 
-bool Bullet::Is(string type){
+bool Bullet::Is(string type) {
 	return (type == "Bullet");
 }
 
-void Bullet::NotifyCollision(GameObject& other){
+void Bullet::NotifyCollision(GameObject& other) {
 	if(other.Is("Player")){
 		distanceLeft = 0;
 	}

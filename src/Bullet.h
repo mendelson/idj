@@ -1,8 +1,10 @@
 /*
- * Bullet.h
- *
- *  Created on: 16/04/2015
- *      Author: Vitor
+  Bullet.h
+
+   Created on: 16/04/2015
+       Author: Vitor
+  Reviewed on: 01/09/2018
+     Reviewer: Gabriela Barrozo Guedes
  */
 
 #ifndef SRC_BULLET_H_
@@ -20,9 +22,11 @@ using std::string;
 using std::cout;
 using std::endl;
 
-class Bullet : public GameObject{
+class Bullet : public GameObject {
 public:
-	Bullet(float x,float y,GameObject* planet, float angle, float alturaIncial, float speed,float maxDistance, string sprite,bool targetsPlay,int frameCount = 1);
+	Bullet(float x,float y,GameObject* planet, float angle, float initialHight,
+			float speed,float maxDistance, string sprite,bool targetsPlay,
+			int frameCount = 1);
 	void Update(float dt);
 	void Render();
 	bool IsDead();
@@ -31,9 +35,9 @@ public:
 	void NotifyCollision(GameObject&);
 	bool targetsPlayer;
 private:
-	float alturaInicial;
+	float initialHight;
 	GameObject* planet;
-	Sprite sp;
+	Sprite sprite;
 	Point speed;
 	float distanceLeft;
 	float angle;
