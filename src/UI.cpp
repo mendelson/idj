@@ -82,17 +82,17 @@ void UI::Update(float dt) {
 		}
 
 		//Weapons
-		if (StageState::CheckWeapon() == StageState::WeaponName_lazy::BROOM) {
+		if (StageState::GetWeapon() == StageState::SimpleWeaponName::BROOM) {
 			bgBroom.SetFrame(-1);
 			bgSword.SetFrame(0);
 			bgGun.SetFrame(0);
-		} else if (StageState::CheckWeapon()
-				== StageState::WeaponName_lazy::SWORD) {
+		} else if (StageState::GetWeapon()
+				== StageState::SimpleWeaponName::SWORD) {
 			bgBroom.SetFrame(0);
 			bgSword.SetFrame(-1);
 			bgGun.SetFrame(0);
-		} else if (StageState::CheckWeapon()
-				== StageState::WeaponName_lazy::GUN) {
+		} else if (StageState::GetWeapon()
+				== StageState::SimpleWeaponName::GUN) {
 			bgBroom.SetFrame(0);
 			bgSword.SetFrame(0);
 			bgGun.SetFrame(-1);

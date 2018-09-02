@@ -13,7 +13,7 @@
 #include "WeaponGun.h"
 #include "WeaponSword.h"
 
-FinalState::WeaponName_lazy FinalState::weapon;
+FinalState::SimpleWeaponName FinalState::weapon;
 
 FinalState::FinalState() :
 		bg("img/BACKGROUND.png"), music("audio/fase2.ogg"), ui(3), changeWpCD() {
@@ -369,6 +369,6 @@ void FinalState::Resume() {
 	music.Play(-1);
 }
 
-FinalState::WeaponName_lazy FinalState::CheckWeapon() {
+FinalState::SimpleWeaponName FinalState::GetWeapon() {
 	return weapon;
 }
