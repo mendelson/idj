@@ -10,7 +10,7 @@
 #include "Camera.h"
 #include "Game.h"
 #include "InputManager.h"
-#define ROTATION_ANGLE 180
+#define HALF_TURN 180
 
 const float ANGLE = 3.1415/180 /* Constant used in angle calculation */
 
@@ -58,12 +58,12 @@ void HorizontalLaser::Update(float dt){
 		box.setY(planet->box.getCenterY() + ((planet->box.getH() / 2 - 
 				 300 + initialHeight) * sin(arc)) - (box.getH() / 2));
 		timer.Update(dt);
-		if(timer.Get() > 1){
+		if (timer.Get() > 1) { 
 			timer.Restart();
-			if(sp.GetCurrentFrame() == frameInit - 1){
+			if (sp.GetCurrentFrame() == frameInit - 1) {
 				sp.SetFrame(loadedFrame - 1);
 				sp.SetLoop(loadedFrame - 1,loadedFrame - 1);
-			}else{
+			} else {
 				sp.SetFrame(frameInit - 1);
 				sp.SetLoop(frameInit - 1,frameInit - 1);
 			}
@@ -73,7 +73,7 @@ void HorizontalLaser::Update(float dt){
 
 void HorizontalLaser::Render(){
 	sp.Render(box.getX() + Camera::pos.getX(),box.getY() + 
-			  Camera::pos.getY(),rotation + ROTATION_ANGLE);
+			  Camera::pos.getY(),rotation + HALF_TURN);
 }
 
 bool HorizontalLaser::IsDead(){
@@ -84,7 +84,7 @@ Sprite HorizontalLaser::getSprite(){
 	return sp;
 }
 
-void HorizontalLaser::NotifyCollision(GameObject&){
+void HorizontalLaser::Notif yCollision(GameObject&){
 
 }
 
