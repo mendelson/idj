@@ -6,17 +6,20 @@
  * 	Reviewed on: 02/09/2018
  * 		Reviewer: Vitor
  */
-#include "./HorizontalLaser.h"
+#include "HorizontalLaser.h"
 #include "Camera.h"
 #include "Game.h"
 #include "InputManager.h"
 #define HALF_TURN 180
+#define MOVEMENT 300
+#define LASER_IMG "img/laser.png"
+#define HORIZONTAL "HorizontalLaser"
 
 const float ANGLE = 3.1415/180 /* Constant used in angle calculation */
 
 HorizontalLaser::HorizontalLaser(float x,float y,GameObject* planet, float rotation,
 						   float initialHeight,int frameI,int frameC)
-						   :sp("img/laser.png",0,2,8),timer() {
+						   :sp(LASER_IMG,0,2,8),timer() {
 
 	this->planet = planet;
 	box.x = x;
@@ -47,16 +50,15 @@ HorizontalLaser::~HorizontalLaser() {
 }
 
 /* Update the laser position on the screen */
-
-void HorizontalLaser::Update(float dt){
+void HorizontalLaser::Update(float deltaTimeCalculator){
 	sumRotation = planet->sumRotation;
 	rotation += sumRotation;
 
 		float arc = rotation * ANGLE;
 		box.setX(planet->box.getCenterX() + ((planet->box.getW() / 2 - 
-				 300 + initialHeight) * cos(arc)) - (box.getW() / 2));
+				 MOVEMENT + initialHeight) * cos(arc)) - (box.getW() / 2));
 		box.setY(planet->box.getCenterY() + ((planet->box.getH() / 2 - 
-				 300 + initialHeight) * sin(arc)) - (box.getH() / 2));
+				 MOVEMENT + initialHeight) * sin(arc)) - (box.getH() / 2));
 		timer.Update(dt);
 		if (timer.Get() > 1) { 
 			timer.Restart();
@@ -89,5 +91,5 @@ void HorizontalLaser::Notif yCollision(GameObject&){
 }
 
 bool HorizontalLaser::Is(string type){
-	return (type == "HorizontalLaser");
+	return (type == HORIZONTAL);
 }

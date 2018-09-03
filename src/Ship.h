@@ -1,22 +1,21 @@
 /*
- * Nave.h
+ * Ship.h
  *
  *  Created on: 11/07/2015
  *      Author: Vitor
  */
 
-#ifndef SRC_NAVE_H_
-#define SRC_NAVE_H_
-
+#ifndef SRC_Ship_H_
+#define SRC_Ship_H_
 #include "GameObject.h"
 #include "Timer.h"
 
-
-class Nave : public GameObject{
+class Ship : public GameObject{
 public:
-	Nave(float x,float y,GameObject* planet, float rotation,float initialHeight, string file);
-	~Nave();
-	void Update(float dt);
+	Ship(float x,float y,GameObject* planet, float rotation,
+		 float initialHeight, string file);
+	~Ship();
+	void Update(float deltaTimeCalculator);
 	void Render();
 	bool IsDead();
 	Sprite getSprite();
@@ -29,4 +28,4 @@ private:
 
 };
 
-#endif /* SRC_NAVE_H_ */
+#endif /* SRC_Ship_H_ */

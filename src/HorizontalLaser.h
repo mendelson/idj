@@ -7,8 +7,8 @@
  * 		Reviewer: Vitor
  */
 
-#ifndef SRC_HorizontalLaserDEITADO_H_
-#define SRC_HorizontalLaserDEITADO_H_
+#ifndef SRC_HorizontalLaser_H_
+#define SRC_HorizontalLaser_H_
 
 #include "GameObject.h"
 #include "Timer.h"
@@ -16,9 +16,9 @@
 class HorizontalLaser : public GameObject{
 public:
 	HorizontalLaser(float x,float y,GameObject* planet, float rotation,
-				 float alturaInicial,int frameI,int frameC);
+				 float initialHeight,int frameI,int frameC);
 	~HorizontalLaser();
-	void Update(float dt);
+	void Update(float deltaTimeCalculator);
 	void Render();
 	bool IsDead();
 	Sprite getSprite();
@@ -33,4 +33,4 @@ private:
 	int frameInit;
 
 };
-#endif /* SRC_HorizontalLaserDEITADO_H_ */
+#endif /* SRC_HorizontalLaser_H_ */

@@ -1,5 +1,5 @@
 /*
- * Nave.cpp
+ * Ship.cpp
  *
  *  Created on: 11/07/2015
  *      Author: Vitor
@@ -7,16 +7,17 @@
  * 		Reviewer: Vitor
  */
 
-#include "Nave.h"
+#include "Ship.h"
 #include "Camera.h"
 #include "Game.h"
 #include "InputManager.h"
 #define VERTICAL_TURN 90
 #define SHIP "Nave"
+#define MOVEMENT 300
 
 const float ANGLE = 3.1415/180 /* Constant used in angle calculation */
 
-Nave::Nave(float x,float y,GameObject* planet, float rotation,
+Ship::Ship(float x,float y,GameObject* planet, float rotation,
 		   	float initialHeight, string file):sp(file) {
 	this->planet = planet;
 
@@ -32,39 +33,39 @@ Nave::Nave(float x,float y,GameObject* planet, float rotation,
 			 planet->box.getCenterY() + initialHeight) * sin(arc)) - (box.getH() / 2));
 }
 
-Nave::~Nave() {
+Ship::~Ship() {
 	// TODO Auto-generated destructor stub
 }
 
 /* Update the ship position on the screen */
-void Nave::Update(float deltaTimeCalculator){
+void Ship::Update(float deltaTimeCalculator){
 	sumRotation = planet->sumRotation;
 	rotation += sumRotation;
 
 		float arc = rotation * ANGLE;
 		box.setX(planet->box.getCenterX() + ((planet->box.getW() / 2 -
-				 300 + initialHeight) * cos(arc)) - (box.getW() / 2));
+				 MOVEMENT + initialHeight) * cos(arc)) - (box.getW() / 2));
 		box.setY(planet->box.getCenterY() + ((planet->box.getH() / 2 -
-				 300 + initialHeight) * sin(arc)) - (box.getH() / 2));
+				 MOVEMENT + initialHeight) * sin(arc)) - (box.getH() / 2));
 }
 
-void Nave::Render(){
+void Ship::Render(){
 	sp.Render(box.getX() + Camera::pos.getX(),box.getY() +
 			  Camera::pos.getY(),rotation + VERTICAL_TURN);
 }
 
-bool Nave::IsDead(){
+bool Ship::IsDead(){
 	return false;
 }
 
-Sprite Nave::getSprite(){
+Sprite Ship::getSprite(){
 	return sp;
 }
 
-void Nave::NotifyCollision(GameObject&){
+void Ship::NotifyCollision(GameObject&){
 
 }
 
-bool Nave::Is(string type){
+bool Ship::Is(string type){
 	return (type == SHIP);
 }
