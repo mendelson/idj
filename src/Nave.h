@@ -11,9 +11,10 @@
 #include "GameObject.h"
 #include "Timer.h"
 
+
 class Nave : public GameObject{
 public:
-	Nave(float x,float y,GameObject* planet, float rotation,float alturaInicial, string file);
+	Nave(float x,float y,GameObject* planet, float rotation,float initialHeight, string file);
 	~Nave();
 	void Update(float dt);
 	void Render();
@@ -24,7 +25,7 @@ public:
 private:
 	Sprite sp;
 	GameObject* planet;
-	float alturaInicial;
+	float initialHeight;
 
 };
 
