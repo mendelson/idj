@@ -39,7 +39,7 @@ private:
 	Point speed;
 	float distanceLeft;
 	float angle;
-	int frameCount;
+  int frameCount;
 };
 
 #endif

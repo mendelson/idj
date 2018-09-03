@@ -70,7 +70,7 @@ void Player::Update(float dt)
 				Game::GetInstance().Push(stageState);
 			}
 		}
-		somaRotation = 0;
+		sumRotation = 0;
 		body.SetLoop(14,14);
 		body.Update(1);
 		deathAnimation.Update(dt);
@@ -79,8 +79,8 @@ void Player::Update(float dt)
 
 	knockback.Update(dt);
 	dmgCD.Update(dt);
-	jumpY = planet->getAltura(planet->rotation);
-	somaRotation = 0;
+	jumpY = planet->getHeight(planet->rotation);
+	sumRotation = 0;
 
 
 	if(InputManager::GetInstance().MousePress(LEFT_MOUSE_BUTTON)){
@@ -94,9 +94,9 @@ void Player::Update(float dt)
 		loopEnd = 17;
 
 		if (kbDirection == LEFT)
-			somaRotation = 1;
+			sumRotation = 1;
 		else
-			somaRotation = -1;
+			sumRotation = -1;
 	}
 	else
 	{
@@ -122,7 +122,7 @@ void Player::Update(float dt)
 				loopEnd = 7;
 				orientation = LEFT;
 				body.SetFlipH(true);
-				somaRotation = 1;
+				sumRotation = 1;
 		}
 		else if(InputManager::GetInstance().IsKeyDown(SDLK_RIGHT))
 		{
@@ -130,7 +130,7 @@ void Player::Update(float dt)
 			loopEnd = 7;
 			orientation = RIGHT;
 			body.SetFlipH(false);
-			somaRotation = -1;
+			sumRotation = -1;
 		}
 		else
 		{
@@ -142,32 +142,32 @@ void Player::Update(float dt)
 		//verifica se ele quer correr pra esse lado
 		//corrida
 		if(InputManager::GetInstance().IsKeyDown(SDLK_SPACE)){
-			somaRotation*=2;
+			sumRotation*=2;
 		}
 
 		//verifica se ele pode ir pra onde quer, e sobe se ele deve subir
 		//if(jumpState == STAND){
-			int proxAltura = planet->getAltura(planet->rotation + somaRotation);
-			//a de cima é a proxima altura que ele ira, esta é a proxima altura do angulo, deve se usar a de baixo para verificar se eh uma rampa que ele pode subir, pois se ele estiver correndo pode subir muito
+			int proxAltura = planet->getHeight(planet->rotation + sumRotation);
+			//a de cima ï¿½ a proxima altura que ele ira, esta ï¿½ a proxima altura do angulo, deve se usar a de baixo para verificar se eh uma rampa que ele pode subir, pois se ele estiver correndo pode subir muito
 			//usamos entao a de cima para subir o personagem
-			//int alturaProxAngulo = planet->getAltura(planet->rotation + (somaRotation/abs(somaRotation)));
+			//int alturaProxAngulo = planet->getHeight(planet->rotation + (sumRotation/abs(sumRotation)));
 			int difAltura = proxAltura - box.getY();
 			//int difAlturaProxAngulo = alturaProxAngulo - jumpY;
 			//usa esse porque se ele estiver correndo a altura pode subir mais do que o normal
-			//float difAlturaPorAngulo = abs(difAltura / somaRotation);
-			if(planet->podeSubir(planet->rotation + somaRotation) || difAltura >= 0){
+			//float difAlturaPorAngulo = abs(difAltura / sumRotation);
+			if(planet->canMoveUp(planet->rotation + sumRotation) || difAltura >= 0){
 				//cout << "difAltura" << difAltura << endl;
 				if(jumpState == STAND && box.getY() == jumpY)
 					box.setY(box.getY() + difAltura);
 			}else{
-				somaRotation = 0;
+				sumRotation = 0;
 			}
 
 
 
 
 			//se ele andar e o jumpy nao for o mesmo do chao tenta fazer ele cair, pois ele pode estar saindo da plataforma, se ainda estivar na plataforma isso vai ser resolvido na colisao
-			if(somaRotation != 0 && jumpState == STAND){
+			if(sumRotation != 0 && jumpState == STAND){
 				if(jumpY > box.getY()){
 					jumpState = JUMP;
 					jumped = 300;
@@ -217,7 +217,7 @@ void Player::Update(float dt)
 	//}
 
 	//ajusta somarotation ao planeta
-	somaRotation = somaRotation/planet->nPlaneta;
+	sumRotation = sumRotation/planet->nPlaneta;
 
 
 	body.SetLoop(loopStart,loopEnd);

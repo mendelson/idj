@@ -9,25 +9,27 @@
 #include "InputManager.h"
 #include "Camera.h"
 
-Planet::Planet(float x, float y,string file,string mapaPlaneta,string mapaSubida,int nPlaneta):sp(file) {
-	int novox = x - (sp.GetWidth()/2);
-	int novoy = y;
-	box.setX(novox);
-	box.setY(novoy);
-	box.setH(sp.GetHeight());
-	box.setW(sp.GetWidth());
+#define FULL_TURN FULL_TURN
+
+Planet::Planet(float x, float y,string file,string planetMap,string mapUp,int planetNumber):sprite(file) {
+	int newXPosition = x - (sprite.GetWidth()/2);
+	int newYPosition = y;
+	box.setX(newXPosition);
+	box.setY(newYPosition);
+	box.setH(sprite.GetHeight());
+	box.setW(sprite.GetWidth());
 	rotation = 0;
 	FILE* fp;
-	fp = fopen(mapaPlaneta.c_str(),"r");
-	for(int i=0;i<361;i++){
-		fscanf(fp,"%d,",&offsetALtura[i]);
+	fp = fopen(planetMap.c_str(),"r");
+	for(int i=0;i<=FULL_TURN;i++){
+		fscanf(fp,"%d,",&offsetHeight[i]);
 	}
 	FILE* f;
-	f = fopen(mapaSubida.c_str(),"r");
-	for(int i=0;i<361;i++){
-		fscanf(f,"%d,",&mapaSubida[i]);
+	f = fopen(mapUp.c_str(),"r");
+	for(int i=0;i<=FULL_TURN;i++){
+		fscanf(f,"%d,",&mapUp[i]);
 	}
-	this->nPlaneta = nPlaneta;
+	this->planetNumber = planetNumber;
 	fclose(fp);
 	fclose(f);
 	free(fp);
@@ -38,19 +40,19 @@ Planet::~Planet() {
 	// TODO Auto-generated destructor stub
 }
 
-void Planet::Update(float dt){
-		somaRotation = Player::player->somaRotation;
-		rotation += somaRotation;
-		while(rotation > 360){
-				rotation -= 360;
+void Planet::Update(float deltaTime){
+		sumRotation = Player::player->sumRotation;
+		rotation += sumRotation;
+		while(rotation > FULL_TURN){
+				rotation -= FULL_TURN;
 		}
 		while(rotation <0 ){
-				rotation += 360;
+				rotation += FULL_TURN;
 		}
 }
 
 void Planet::Render(){
-	sp.Render(box.getX() +  Camera::pos.getX(),box.getY() +  Camera::pos.getY(),rotation);
+	sprite.Render(box.getX() +  Camera::pos.getX(),box.getY() +  Camera::pos.getY(),rotation);
 }
 
 
@@ -63,28 +65,28 @@ bool Planet::Is(string type){
 }
 
 Sprite Planet::getSprite(){
-	return sp;
+	return sprite;
 }
 
 void Planet::NotifyCollision(GameObject& object){
 
 }
 
-int Planet::getAltura(float rotation){
-	while(rotation < 0) rotation += 360;
+int Planet::getHeight(float rotation){
+	while(rotation < 0) rotation += FULL_TURN;
 
-	while (rotation > 360) rotation  -= 360;
+	while (rotation > FULL_TURN) rotation  -= FULL_TURN;
 
-	int auxrotation = ((int ) rotation) % 360;
-	return -offsetALtura[auxrotation] + Player::player->getSprite().GetHeight();
+	int auxRotation = ((int ) rotation) % FULL_TURN;
+	return -offsetHeight[auxRotation] + Player::player->getSprite().GetHeight();
 }
 
-bool Planet::podeSubir(float rotation){
-	while(rotation < 0) rotation += 360;
+bool Planet::canMoveUp(float rotation){
+	while(rotation < 0) rotation += FULL_TURN;
 
-	while (rotation > 360) rotation  -= 360;
-	int auxrotation = ((int ) rotation) % 360;
-	if(mapaSubida[auxrotation] == 1)
+	while (rotation > FULL_TURN) rotation  -= FULL_TURN;
+	int auxRotation = ((int ) rotation) % FULL_TURN;
+	if(mapUp[auxRotation] == 1)
 		return true;
 	return false;
 
