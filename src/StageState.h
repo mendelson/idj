@@ -34,7 +34,7 @@ public:
 
 	StageState();
 	~StageState();
-	void Update(float dt);
+	void Update(float deltaTime);
 	void Render();
 	void Pause();
 	void Resume();
@@ -44,7 +44,7 @@ private:
 	Music music;
 	UI userInterface;
 	float backgroundSize;
-	Weapon* activeWeapon;
+	Weapon *activeWeapon;
 	Timer musicTime;
 	static SimpleWeaponName weaponNumber;
 };
