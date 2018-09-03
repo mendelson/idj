@@ -12,7 +12,7 @@
 #include "Game.h"
 #include "InputManager.h"
 #define VERTICAL_TURN 90
-#define SHIP "Nave"
+#define SHIP "Ship"
 #define MOVEMENT 300
 
 const float ANGLE = 3.1415/180 /* Constant used in angle calculation */

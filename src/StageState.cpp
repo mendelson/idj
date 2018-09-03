@@ -235,7 +235,7 @@ StageState::StageState() :background(BACKGROUND_IMG), music(MUSIC_LEVEL1),
 									  ENERGY_HEIGHT, ENERGY_IMG, ENERGY_FRAME);
 	objectArray.emplace_back(energy3);
 
-	GameObject *spaceShip = new Nave(MAX_POS_DISTANCE,CENTER, planet, -89, 150,
+	GameObject *spaceShip = new Ship(MAX_POS_DISTANCE,CENTER, planet, -89, 150,
 									 SHIP_SHUT_DOWN);
 	objectArray.emplace_back(spaceShip);
 

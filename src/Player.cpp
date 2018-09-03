@@ -257,7 +257,7 @@ Sprite Player::getSprite()
 void Player::NotifyCollision(GameObject& other)
 {
 
-	if(other.Is("Nave")  && abs(box.getCenterX() - other.box.getCenterX()) < 50 ){
+	if(other.Is("Ship")  && abs(box.getCenterX() - other.box.getCenterX()) < 50 ){
 		if(qntEnergia > 2){
 			qntEnergia = 0;
 			deveMudarDeFase = true;
@@ -333,7 +333,7 @@ void Player::NotifyCollision(GameObject& other)
 		hp -= 10;
 	}
 
-	if(other.Is("LaserDeitado") && abs(box.getCenterY() - other.box.getCenterY()) < 20 && other.getSprite().GetCurrentFrame() !=0){
+	if(other.Is("HorizontalLaser") && abs(box.getCenterY() - other.box.getCenterY()) < 20 && other.getSprite().GetCurrentFrame() !=0){
 			hp -= 10;
 	}
 

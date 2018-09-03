@@ -20,7 +20,7 @@
 #include "Energia.h"
 #include "Laser.h"
 #include "EnemyTank.h"
-#include "Nave.h"
+#include "Ship.h"
 
 class Weapon;
 
