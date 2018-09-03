@@ -223,15 +223,15 @@ StageState::StageState() :background(BACKGROUND_IMG), music(MUSIC_LEVEL1),
 										1.5 * PLAT_INITIAL_HEIGHT, PLATFORM_2200_15);
 	objectArray.emplace_back(platform);
 
-	GameObject *energy1 = new Energia(MAX_POS_DISTANCE,CENTER, planet, 90,
+	GameObject *energy1 = new Energy(MAX_POS_DISTANCE,CENTER, planet, 90,
 									  ENERGY_HEIGHT, ENERGY_IMG, ENERGY_FRAME);
 	objectArray.emplace_back(energy1);
 
-	GameObject *energy2 = new Energia(MAX_POS_DISTANCE,CENTER, planet, 47,
+	GameObject *energy2 = new Energy(MAX_POS_DISTANCE,CENTER, planet, 47,
 									  ENERGY_HEIGHT, ENERGY_IMG, ENERGY_FRAME);
 	objectArray.emplace_back(energy2);
 
-	GameObject *energy3 = new Energia(MAX_POS_DISTANCE,CENTER, planet, 230,
+	GameObject *energy3 = new Energy(MAX_POS_DISTANCE,CENTER, planet, 230,
 									  ENERGY_HEIGHT, ENERGY_IMG, ENERGY_FRAME);
 	objectArray.emplace_back(energy3);
 

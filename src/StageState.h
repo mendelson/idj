@@ -17,7 +17,7 @@
 #include "Enemy3.h"
 #include "PlanetaFundo.h"
 #include "Cometa.h"
-#include "Energia.h"
+#include "Energy.h"
 #include "Laser.h"
 #include "EnemyTank.h"
 #include "Ship.h"

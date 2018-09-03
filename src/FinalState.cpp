@@ -191,15 +191,15 @@ FinalState::FinalState() :
 			"img/platfase3/images/29Plataformas.png", 3);
 	objectArray.emplace_back(plataforma30);
 
-	GameObject* energia1 = new Energia(500, 0, planet, 135, 300,
+	GameObject* energia1 = new Energy(500, 0, planet, 135, 300,
 			"img/energia_fase_3.png", 5);
 	objectArray.emplace_back(energia1);
 
-	GameObject* energia2 = new Energia(500, 0, planet, 197, 300,
+	GameObject* energia2 = new Energy(500, 0, planet, 197, 300,
 			"img/energia_fase_3.png", 5);
 	objectArray.emplace_back(energia2);
 
-	GameObject* energia3 = new Energia(500, 0, planet, -15, 300,
+	GameObject* energia3 = new Energy(500, 0, planet, -15, 300,
 			"img/energia_fase_3.png", 5);
 	objectArray.emplace_back(energia3);
 
