@@ -9,9 +9,9 @@
 #include "InputManager.h"
 #include "Camera.h"
 
-#define FULL_TURN FULL_TURN
+#define FULL_TURN 360 
 
-Planet::Planet(float x, float y,string file,string planetMap,string mapUp,int planetNumber):sprite(file) {
+Planet::Planet(float x, float y,string file,string planetMap,string mapUp,int nPlaneta):sprite(file) {
 	int newXPosition = x - (sprite.GetWidth()/2);
 	int newYPosition = y;
 	box.setX(newXPosition);
@@ -29,7 +29,7 @@ Planet::Planet(float x, float y,string file,string planetMap,string mapUp,int pl
 	for(int i=0;i<=FULL_TURN;i++){
 		fscanf(f,"%d,",&mapUp[i]);
 	}
-	this->planetNumber = planetNumber;
+	this->nPlaneta = nPlaneta;
 	fclose(fp);
 	fclose(f);
 	free(fp);
@@ -41,8 +41,8 @@ Planet::~Planet() {
 }
 
 void Planet::Update(float deltaTime){
-		sumRotation = Player::player->sumRotation;
-		rotation += sumRotation;
+		somaRotation = Player::player->somaRotation;
+		rotation += somaRotation;
 		while(rotation > FULL_TURN){
 				rotation -= FULL_TURN;
 		}

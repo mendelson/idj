@@ -36,8 +36,8 @@ Energy::~Energy() {
 }
 
 void Energy::Update(float deltaTime){
-	sumRotation = planet->sumRotation;
-	rotation += sumRotation;
+	somaRotation = planet->somaRotation;
+	rotation += somaRotation;
 
 		float angle = rotation*PI/HALF_TURN;
 		box.setX(planet->box.getCenterX() + ((planet->box.getW()/2 - 300 + initialHeight)*cos(angle)) - (box.getW()/2));

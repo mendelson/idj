@@ -15,7 +15,7 @@
 #define LASER_IMG "img/laser.png"
 #define HORIZONTAL "HorizontalLaser"
 
-const float ANGLE = 3.1415/180 /* Constant used in angle calculation */
+const float ANGLE = 3.1415/180; /* Constant used in angle calculation */
 
 HorizontalLaser::HorizontalLaser(float x,float y,GameObject* planet, float rotation,
 						   float initialHeight,int frameI,int frameC)
@@ -51,15 +51,15 @@ HorizontalLaser::~HorizontalLaser() {
 
 /* Update the laser position on the screen */
 void HorizontalLaser::Update(float deltaTimeCalculator){
-	sumRotation = planet->sumRotation;
-	rotation += sumRotation;
+	somaRotation = planet->somaRotation;
+	rotation += somaRotation;
 
 		float arc = rotation * ANGLE;
 		box.setX(planet->box.getCenterX() + ((planet->box.getW() / 2 - 
 				 MOVEMENT + initialHeight) * cos(arc)) - (box.getW() / 2));
 		box.setY(planet->box.getCenterY() + ((planet->box.getH() / 2 - 
 				 MOVEMENT + initialHeight) * sin(arc)) - (box.getH() / 2));
-		timer.Update(dt);
+		timer.Update(deltaTimeCalculator);
 		if (timer.Get() > 1) { 
 			timer.Restart();
 			if (sp.GetCurrentFrame() == frameInit - 1) {
@@ -86,7 +86,7 @@ Sprite HorizontalLaser::getSprite(){
 	return sp;
 }
 
-void HorizontalLaser::Notif yCollision(GameObject&){
+void HorizontalLaser::NotifyCollision(GameObject&){
 
 }
 

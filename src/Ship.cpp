@@ -15,7 +15,7 @@
 #define SHIP "Ship"
 #define MOVEMENT 300
 
-const float ANGLE = 3.1415/180 /* Constant used in angle calculation */
+const float ANGLE = 3.1415/180; /* Constant used in angle calculation */
 
 Ship::Ship(float x,float y,GameObject* planet, float rotation,
 		   	float initialHeight, string file):sp(file) {
@@ -39,8 +39,8 @@ Ship::~Ship() {
 
 /* Update the ship position on the screen */
 void Ship::Update(float deltaTimeCalculator){
-	sumRotation = planet->sumRotation;
-	rotation += sumRotation;
+	somaRotation = planet->somaRotation;
+	rotation += somaRotation;
 
 		float arc = rotation * ANGLE;
 		box.setX(planet->box.getCenterX() + ((planet->box.getW() / 2 -
