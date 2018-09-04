@@ -210,37 +210,37 @@ FinalState::FinalState() :
 	GameObject* laserEterno = new HorizontalLaser(500, 0, planet, -50, 0, 3, 3);
 	objectArray.emplace_back(laserEterno);
 
-	GameObject* pontaLaser1 = new PontaLaser(500, 0, planet, -55, 0, -90);
+	GameObject* pontaLaser1 = new LaserTip(500, 0, planet, -55, 0, -90);
 	objectArray.emplace_back(pontaLaser1);
 
 	GameObject* laserEterno2 = new HorizontalLaser(500, 0, planet, -45, 0, 6, 6);
 	objectArray.emplace_back(laserEterno2);
 
-	GameObject* pontaLaser2 = new PontaLaser(500, 0, planet, -46, 0, -90);
+	GameObject* pontaLaser2 = new LaserTip(500, 0, planet, -46, 0, -90);
 	objectArray.emplace_back(pontaLaser2);
 
 	GameObject* laserEterno3 = new HorizontalLaser(500, 0, planet, -15, 40, 1, 3);
 	objectArray.emplace_back(laserEterno3);
 
-	GameObject* pontaLaser3 = new PontaLaser(500, 0, planet, -20, 40, -90);
+	GameObject* pontaLaser3 = new LaserTip(500, 0, planet, -20, 40, -90);
 	objectArray.emplace_back(pontaLaser3);
 
 	GameObject* laser4 = new HorizontalLaser(500, 0, planet, -20, 110, 1, 3);
 	objectArray.emplace_back(laser4);
 
-	GameObject* pontaLaser4 = new PontaLaser(500, 0, planet, -25, 110, -90);
+	GameObject* pontaLaser4 = new LaserTip(500, 0, planet, -25, 110, -90);
 	objectArray.emplace_back(pontaLaser4);
 
 	GameObject* laser5 = new HorizontalLaser(500, 0, planet, 0, 0, 6, 6);
 	objectArray.emplace_back(laser5);
 
-	GameObject* pontaLaser5 = new PontaLaser(500, 0, planet, -1, 0, -90);
+	GameObject* pontaLaser5 = new LaserTip(500, 0, planet, -1, 0, -90);
 	objectArray.emplace_back(pontaLaser5);
 
 	GameObject* laser6 = new Laser(500, 0, planet, 10, 150, 1, 8);
 	objectArray.emplace_back(laser6);
 
-	GameObject* pontaLaser6 = new PontaLaser(500, 0, planet, 10, 500, 180);
+	GameObject* pontaLaser6 = new LaserTip(500, 0, planet, 10, 500, 180);
 	objectArray.emplace_back(pontaLaser6);
 //
 //	GameObject* laser = new Laser(500,0,planet,240,200,1,8);

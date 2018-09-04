@@ -28,7 +28,7 @@ public:
 	bool IsDead();
 	Sprite getSprite();
 	bool Is(string type);
-	void NotifyCollision(GameObject&);
+void NotifyCollision(GameObject&);
 	void Shoot(Point pos);
 private:
 	Sprite sprite;

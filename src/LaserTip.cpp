@@ -1,5 +1,5 @@
 /*
- * PontaLaser.cpp
+ * LaserTip.cpp
  *
  *  Created on: 12/07/2015
  *      Author: Vitor
@@ -9,12 +9,12 @@
 
 /* Tecnicas Usadas: T1,T4,T5 */
 
-#include "PontaLaser.h"
+#include "LaserTip.h"
 #include "Camera.h"
 #include "Game.h"
 #include "InputManager.h"
 
-PontaLaser::LaserTip(float x,float y,GameObject* planet, float rotation,float initialHeight,int d):sprite("img/laser.png",0,2,8) {
+LaserTip::LaserTip(float x,float y,GameObject* planet, float rotation,float initialHeight,int d):sprite("img/laser.png",0,2,8) {
 	this->planet = planet;
 
 	box.x = x;
@@ -47,14 +47,14 @@ void LaserTip::Update(float deltaTime) {
 	}
 
 void LaserTip::Render() {
-	sprite.Render(box.getX() + Camera::pos.getX(),box.getY() +  Camera::pos.getY(),rotation + 90 + direcao);
+	sprite.Render(box.getX() + Camera::pos.getX(),box.getY() +  Camera::pos.getY(),rotation + 90 + d);
 	}
 
 bool LaserTip::IsDead() {
 	return false;
 	}
 
-Sprite LaserTip::GetSprite() {
+Sprite LaserTip::getSprite() {
 	return sprite;
 	}
 

@@ -26,7 +26,7 @@ EnemyJellyfish::~EnemyJellyfish()
 
 }
 
-void EnemyJellyfish::Update(float deltaTimeCalc)
+void EnemyJellyfish::Update(float deltaTime)
 {
 	Point* playerPos = new Point (Player::player->box.getCenterX(), Player::player->box.getCenterY());
 	Point* currentPos = new Point (box.getCenterX(), box.getCenterY());
