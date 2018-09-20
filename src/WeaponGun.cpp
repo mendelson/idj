@@ -2,6 +2,7 @@
  * File: WeaponGun.cpp
  * Purpose: Implementation of class WeaponGun
  ******************************************************/
+
 #include "WeaponGun.h"
 
 #include <SDL_keycode.h>
@@ -55,7 +56,6 @@ void WeaponGun::Update(float deltaTime) {
 	}
 
 	deathCD.Update(deltaTime);
-
 	// verify player status to adjust and to stop akt
 	if (Player::player == NULL) {
 		return;
@@ -74,10 +74,8 @@ void WeaponGun::Update(float deltaTime) {
 		atkFrame = false;
 	}
 
-
 	// Use the keyboard to detect the attack and start sound atack
 	// passing the initial and final Loop parameters to update the sprite
-
 	if (InputManager::GetInstance().KeyPress(SDLK_a) || atkFrame) {
 		Sound* sound = new Sound("audio/projetil.wav");
 		sound->Play(0);
@@ -91,8 +89,9 @@ void WeaponGun::Update(float deltaTime) {
 			sprite.SetLoop(0, 0);
 		} else {
 			sprite.SetLoop(0, 7);
-			if (Player::player->planet->somaRotation == 0)
+			if (Player::player->planet->somaRotation == 0){
 				sprite.SetLoop(2, 2);
+			}
 		}
 	}
 

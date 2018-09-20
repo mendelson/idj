@@ -28,8 +28,8 @@ public:
 
 private:
 	bool atkFrame;
-	Sprite sprite;
+	Sprite sprite; 	//sprite is responsable to load images and textures for the game
 };
 
 
-#endif /* SRC_WEAPONGUN_H_ */
+#endif
