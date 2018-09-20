@@ -1,3 +1,7 @@
+/*****************************************************
+	* File: WeaponGun.cpp
+	* Purpose: Implementation of class WeaponGun
+******************************************************/
 #include "WeaponGun.h"
 
 #include <SDL_keycode.h>
@@ -7,21 +11,26 @@
 #include "InputManager.h"
 #include "Point.h"
 
-WeaponGun::WeaponGun(std::string file) : sp(file,0.1,2,8)
+WeaponGun::WeaponGun(std::string file) : sprite(file,0.1,2,8)
 {
 	isDead = false;
-	sp.SetScaleX(0.5);
-	sp.SetScaleY(0.5);
+	sprite.SetScaleX(0.5);
+	sprite.SetScaleY(0.5);
 	box.setX(Player::player->box.x);
 	box.setY(Player::player->box.y);
-	box.setH(sp.GetHeight());
-	box.setW(sp.GetWidth());
+	box.setH(sprite.GetHeight());
+	box.setW(sprite.GetWidth());
 
 	atkFrame = false;
 
+	/*
+	 * Checking players orientation and if this orientation
+	 * was in left direction flip is ocurred
+	*/
 	orientation = Player::player->orientation;
-	if (orientation == LEFT)
-		sp.SetFlipH(true);
+	if (orientation == LEFT) {
+		sprite.SetFlipH(true);
+	}
 }
 
 WeaponGun::~WeaponGun()
@@ -29,17 +38,21 @@ WeaponGun::~WeaponGun()
 
 }
 
-void WeaponGun::Update(float dt)
+/*
+ * update position, using position and time to realize ajust
+ * with data a previous move
+ * */
+void WeaponGun::Update(float deltaTime)
 {
 	if (Player::player->GetHp() <= 0)
 	{
 		somaRotation = 0;
-		sp.SetLoop(10,10);
-		sp.Update(1);
+		sprite.SetLoop(10,10);
+		sprite.Update(1);
 		return;
 	}
 
-	deathCD.Update(dt);
+	deathCD.Update(deltaTime);
 
 	if (Player::player == NULL)
 		return;
@@ -49,11 +62,11 @@ void WeaponGun::Update(float dt)
 	orientation = Player::player->orientation;
 
 	if (orientation == LEFT)
-		sp.SetFlipH(true);
+		sprite.SetFlipH(true);
 	else
-		sp.SetFlipH(false);
+		sprite.SetFlipH(false);
 
-	if (sp.GetCurrentFrame() == 9)
+	if (sprite.GetCurrentFrame() == 9)
 		atkFrame = false;
 
 	if(InputManager::GetInstance().KeyPress(SDLK_a) || atkFrame)
@@ -62,19 +75,19 @@ void WeaponGun::Update(float dt)
 		sound->Play(0);
 		delete(sound);
 		atkFrame = true;
-		sp.SetLoop(8, 9);
+		sprite.SetLoop(8, 9);
 	}
 	else
 	{
 		if (Player::player->loopStart == 16 && Player::player->loopEnd == 17)
 		{
-			sp.SetLoop(0,0);
+			sprite.SetLoop(0,0);
 		}
 		else
 		{
-			sp.SetLoop(0, 7);
+			sprite.SetLoop(0, 7);
 			if (Player::player->planet->somaRotation == 0)
-				sp.SetLoop(2, 2);
+				sprite.SetLoop(2, 2);
 		}
 	}
 
@@ -83,7 +96,7 @@ void WeaponGun::Update(float dt)
 	else
 		rotation -= 90;
 
-	sp.Update(dt);
+	sprite.Update(deltaTime);
 
 	if(InputManager::GetInstance().KeyPress(SDLK_d) && deathCD.Get() > 0.5)
 	{
@@ -100,7 +113,7 @@ void WeaponGun::Render()
 	else
 		c = 25;
 
-	sp.Render(box.getX() +  Camera::pos.getX() + c,box.getY() +  Camera::pos.getY());
+	sprite.Render(box.getX() +  Camera::pos.getX() + c,box.getY() +  Camera::pos.getY());
 }
 
 bool WeaponGun::IsDead()
@@ -110,7 +123,7 @@ bool WeaponGun::IsDead()
 
 Sprite WeaponGun::getSprite()
 {
-	return sp;
+	return sprite;
 }
 
 bool WeaponGun::Is(string type)
