@@ -1,3 +1,7 @@
+/*****************************************************
+	* File: WeaponGun.cpp
+	* Purpose: declaration of class WeaponGun
+******************************************************/
 
 #ifndef SRC_WEAPONGUN_H_
 #define SRC_WEAPONGUN_H_
@@ -14,7 +18,7 @@ class WeaponGun : public Weapon{
 public:
 	WeaponGun(std::string file);
 	~WeaponGun();
-	void Update(float dt);
+	void Update(float deltaTime);
 	void Render();
 	bool IsDead();
 	Sprite getSprite();
@@ -24,8 +28,8 @@ public:
 
 private:
 	bool atkFrame;
-	Sprite sp;
+	Sprite sprite; 	//sprite is responsable to load images and textures for the game
 };
 
 
-#endif /* SRC_WEAPONGUN_H_ */
+#endif

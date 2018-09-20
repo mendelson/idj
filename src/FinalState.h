@@ -24,11 +24,11 @@
 #include "Enemy3.h"
 #include "PlanetaFundo.h"
 #include "Cometa.h"
-#include "Energia.h"
+#include "Energy.h"
 #include "Laser.h"
-#include "LaserDeitado.h"
-#include "PontaLaser.h"
-#include "Nave.h"
+#include "HorizontalLaser.h"
+#include "LaserTip.h"
+#include "Ship.h"
 
 class Weapon;
 
@@ -36,7 +36,7 @@ using std::string;
 
 class FinalState: public State {
 public:
-	enum WeaponName_lazy {
+	enum SimpleWeaponName {
 		BROOM, SWORD, GUN
 	};
 
@@ -46,7 +46,7 @@ public:
 	void Render();
 	void Pause();
 	void Resume();
-	static WeaponName_lazy CheckWeapon();
+	static SimpleWeaponName GetWeapon();
 private:
 	Sprite bg;
 	Music music;
@@ -54,7 +54,7 @@ private:
 	float xBg;
 	Weapon* activeWeapon;
 	Timer changeWpCD;
-	static WeaponName_lazy weapon;
+	static SimpleWeaponName weapon;
 };
 
 #endif /* SRC_FINALSTATE_H_ */

@@ -148,7 +148,7 @@ void Player::Update(float dt)
 		//verifica se ele pode ir pra onde quer, e sobe se ele deve subir
 		//if(jumpState == STAND){
 			int proxAltura = planet->getAltura(planet->rotation + somaRotation);
-			//a de cima é a proxima altura que ele ira, esta é a proxima altura do angulo, deve se usar a de baixo para verificar se eh uma rampa que ele pode subir, pois se ele estiver correndo pode subir muito
+			//a de cima ï¿½ a proxima altura que ele ira, esta ï¿½ a proxima altura do angulo, deve se usar a de baixo para verificar se eh uma rampa que ele pode subir, pois se ele estiver correndo pode subir muito
 			//usamos entao a de cima para subir o personagem
 			//int alturaProxAngulo = planet->getAltura(planet->rotation + (somaRotation/abs(somaRotation)));
 			int difAltura = proxAltura - box.getY();
@@ -257,7 +257,7 @@ Sprite Player::getSprite()
 void Player::NotifyCollision(GameObject& other)
 {
 
-	if(other.Is("Nave")  && abs(box.getCenterX() - other.box.getCenterX()) < 50 ){
+	if(other.Is("Ship")  && abs(box.getCenterX() - other.box.getCenterX()) < 50 ){
 		if(qntEnergia > 2){
 			qntEnergia = 0;
 			deveMudarDeFase = true;
@@ -333,7 +333,7 @@ void Player::NotifyCollision(GameObject& other)
 		hp -= 10;
 	}
 
-	if(other.Is("LaserDeitado") && abs(box.getCenterY() - other.box.getCenterY()) < 20 && other.getSprite().GetCurrentFrame() !=0){
+	if(other.Is("HorizontalLaser") && abs(box.getCenterY() - other.box.getCenterY()) < 20 && other.getSprite().GetCurrentFrame() !=0){
 			hp -= 10;
 	}
 

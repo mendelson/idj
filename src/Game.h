@@ -9,7 +9,7 @@
 #include "StageState.h"
 #include "TitleState.h"
 #include "Camera.h"
-#include "SDL_Mixer.h"
+#include "SDL_mixer.h"
 #include "SDL_ttf.h"
 #include <math.h>
 #include <stack>

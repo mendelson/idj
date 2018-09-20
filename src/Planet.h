@@ -15,20 +15,20 @@
 
 class Planet : public GameObject{
 public:
-	Planet(float x, float y,string file,string mapaPlaneta,string mapaSubida,int nPlaneta);
-	~Planet();
-	void Update(float dt);
-	void Render();
-	bool IsDead();
-	Sprite getSprite();
-	bool Is(string type);
-	void NotifyCollision(GameObject&);
-	int getAltura(float rotation);
-	bool podeSubir(float rotation);
+		Planet(float x, float y,string file,string planetMap,string mapUp,int planetNumber);
+		~Planet();
+		void Update(float deltaTime);
+		void Render();
+		bool IsDead();
+		Sprite getSprite();
+		bool Is(string type);
+		void NotifyCollision(GameObject&);
+		int getHeight(float rotation);
+		bool canMoveUp(float rotation);
 private:
-	Sprite sp;
-	int offsetALtura[361];
-	int mapaSubida[361];
+		Sprite sprite;
+		int offsetHeight[361];
+		int mapUp[361];
 //	FILE* fp;
 //	FILE* f;
 };
