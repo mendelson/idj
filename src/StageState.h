@@ -17,10 +17,10 @@
 #include "Enemy3.h"
 #include "PlanetaFundo.h"
 #include "Cometa.h"
-#include "Energia.h"
+#include "Energy.h"
 #include "Laser.h"
 #include "EnemyTank.h"
-#include "Nave.h"
+#include "Ship.h"
 
 class Weapon;
 
@@ -28,25 +28,25 @@ using std::string;
 
 class StageState: public State {
 public:
-	enum WeaponName_lazy {
+	enum SimpleWeaponName {
 		BROOM, SWORD, GUN
 	};
 
 	StageState();
 	~StageState();
-	void Update(float dt);
+	void Update(float deltaTime);
 	void Render();
 	void Pause();
 	void Resume();
-	static WeaponName_lazy CheckWeapon();
+	static SimpleWeaponName GetWeapon();
 private:
-	Sprite bg;
+	Sprite background;
 	Music music;
-	UI ui;
-	float xBg;
-	Weapon* activeWeapon;
-	Timer changeWpCD;
-	static WeaponName_lazy weapon;
+	UI userInterface;
+	float backgroundSize;
+	Weapon *activeWeapon;
+	Timer musicTime;
+	static SimpleWeaponName weaponNumber;
 };
 
-#endif /* SRC_STAGESTATE_H_ */
+#endif
